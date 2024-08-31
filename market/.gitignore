@@ -2,3 +2,13 @@ venv
 .idea
 db.sqlite3
 __pycache__
+package-lock.json
+package.json
+node_modules
+market/__pycache__
+advertisements/__pycache__
+api/__pycache__
+authentication/__pycache__
+media
+moderators/__pycache__
+users/__pycache__

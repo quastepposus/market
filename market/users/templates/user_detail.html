@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Профиль
+{% endblock %}
+
+{% block content %}
+    <div style="max-width: 800px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+        <h2 style="text-align: center; margin-bottom: 20px;">Профиль</h2>
+        <div style="text-align: center; margin-bottom: 20px;">
+            <div style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">{{ user.username }}</div>
+            <div style="font-size: 18px; color: #555;">{{ user.phone }}</div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            {% for advertisement in advertisements %}
+                <div style="border-bottom: 1px solid #ddd; padding: 10px 0; display: flex; align-items: center;">
+                    {% if advertisement.image %}
+                        <img src="{{ advertisement.image.url }}" alt="{{ advertisement.title }}" style="max-width: 150px; max-height: 100px; object-fit: cover; margin-right: 15px; border-radius: 8px;">
+                    {% endif %}
+                    <div style="flex: 1;">
+                        <div style="font-size: 16px; color: #333;">{{ advertisement.title }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        {% if request.user == user %}
+            <div style="text-align: center; margin-top: 20px;">
+                <button id="edit" style="padding: 10px 20px; background-color: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s ease;">Edit</button>
+            </div>
+        {% endif %}
+    </div>
+
+    <div>
+        <dialog id="editDialog" style="border: none; border-radius: 8px; padding: 20px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+            <form id="editForm" action="{% url 'users:detail' user.pk %}" method="post">
+                {% include 'form.html' with form=form button_text='Edit' %}
+            </form>
+        </dialog>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/user_detail.js' %}"></script>
+{% endblock %}

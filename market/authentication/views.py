@@ -7,8 +7,8 @@ from authentication.forms import UserSignupForm
 
 
 class SignupView(CreateView):
+    model = get_user_model()
     form_class = UserSignupForm
-    form = get_user_model()
     template_name = 'signup.html'
 
     def get_success_url(self):
@@ -19,5 +19,8 @@ class MyLoginView(LoginView):
     template_name = 'login.html'
 
     def get_success_url(self):
-        return reverse('users:profile', kwargs={'username': self.request.user.username})
+        return reverse('users:detail', kwargs={'pk': self.request.user.pk})
+
+# class MyLogoutView(LogoutView):
+#     success_url = reverse('index')
 

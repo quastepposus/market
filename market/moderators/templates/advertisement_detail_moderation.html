@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Объявление
+{% endblock %}
+
+{% block content %}
+    <div style="max-width: 600px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+        {% if advertisement.image %}
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="{{ advertisement.image.url }}" alt="{{ advertisement.title }}" style="max-width: 100%; height: auto; border-radius: 8px;">
+            </div>
+        {% endif %}
+
+        <h2 style="text-align: center; margin-bottom: 10px;">{{ advertisement.title }}</h2>
+
+        <p style="margin-bottom: 20px;">{{ advertisement.description }}</p>
+
+        <p style="font-weight: bold; color: #555;">Категория: <span style="color: #333;">{{ advertisement.category }}</span></p>
+
+        <p hidden="hidden" id="adId">{{ advertisement.pk }}</p>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <button id="accept" style="padding: 10px 20px; margin-right: 10px; background-color: #28a745; color: #fff; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s ease;">Accept</button>
+            <button id="reject" style="padding: 10px 20px; background-color: #dc3545; color: #fff; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s ease;">Reject</button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+    <script type="module" src="{% static 'js/moderator_advertisement_detail.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создать объявление</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form input[type="text"],
+        form input[type="file"],
+        form textarea,
+        form select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+            background-color: #f9f9f9;
+        }
+
+        form input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #555;
+        }
+
+        form label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+            color: #555;
+        }
+
+        form .error {
+            color: #ff4d4d;
+            font-size: 12px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+        form .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 style="text-align: center;">Создать объявление</h1>
+
+    <form enctype="multipart/form-data" action="/advertisements/create/" method="post">
+        {% include 'form.html' with form=form button_text='Create' %}
+    </form>
+
+</body>
+</html>

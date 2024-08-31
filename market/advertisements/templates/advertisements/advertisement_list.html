@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Лист объявлений
+{% endblock %}
+
+{% block content %}
+    <div style="max-width: 800px; margin: 0 auto;">
+        {% for advertisement in advertisements %}
+            <div style="border-bottom: 1px solid #ddd; padding: 15px 0;">
+                <div style="display: flex; align-items: center;">
+                    {% if advertisement.image %}
+                        <img src="{{ advertisement.image.url }}" alt="{{ advertisement.title }}" style="max-width: 150px; max-height: 100px; object-fit: cover; margin-right: 15px;">
+                    {% endif %}
+                    <div>
+                        <a href="{% url 'advertisements:detail' advertisement.pk %}" style="font-size: 18px; color: #333; text-decoration: none;">{{ advertisement.title }}</a>
+                        <p style="margin: 5px 0 0 0; color: #777;">Автор: <a href="{% url 'users:detail' advertisement.author.pk %}" style="color: #555; text-decoration: none;">{{ advertisement.author.username }}</a></p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

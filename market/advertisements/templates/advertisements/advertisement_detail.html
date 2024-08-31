@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Объявление
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-4" style="max-width: 600px; margin: 0 auto;">
+        <h2 style="text-align: center;">{{ advertisement.title }}</h2>
+
+        {% if advertisement.image %}
+            <div class="mb-3" style="text-align: center;">
+                <img src="{{ advertisement.image.url }}" alt="{{ advertisement.title }}" class="img-fluid rounded" style="max-width: 100%; height: auto; max-height: 300px; object-fit: contain;">
+            </div>
+        {% endif %}
+
+        <p style="text-align: justify;">{{ advertisement.description }}</p>
+        <p style="text-align: right;">Категория: {{ advertisement.category }}</p>
+        <p style="text-align: right;">Автор: <strong>{{ advertisement.author.username }}</strong></p>
+
+        {% if request.user == advertisement.author %}
+            <div class="mt-3" style="text-align: center;">
+                <a href="{% url 'advertisements:update' advertisement.pk %}" class="btn btn-secondary" style="margin-right: 10px;">Редактировать</a>
+                <form action="{% url 'advertisements:delete' advertisement.pk %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Удалить</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

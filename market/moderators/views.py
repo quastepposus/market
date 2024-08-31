@@ -12,6 +12,9 @@ class AdvertisementListModeratorView(ListView):
         queryset = super().get_queryset()
         return queryset.filter(status='moderation', is_active=True).order_by('create_time')
 
+    def test_func(self):
+        return self.request.user.is_staff
+
 class AdvertisementDetailModeratorView(DetailView):
     model = Advertisement
     template_name = 'advertisement_detail_moderation.html'
@@ -21,3 +24,5 @@ class AdvertisementDetailModeratorView(DetailView):
         queryset = super().get_queryset()
         return queryset.filter(status='moderation', is_active=True)
 
+    def test_func(self):
+        return self.request.user.is_staff
